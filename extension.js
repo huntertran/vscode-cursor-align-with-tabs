@@ -213,6 +213,16 @@ function createSpaceInsertsFromAlignBlocks(alignBlocks, targetStartChar, targetL
   return spaceInserts;
 }
 
+function convertSpacesToTabs(text, tabSize) {
+  // Replace spaces with tabs
+  const tab = '\t';
+  const spaces = ' '.repeat(tabSize);
+  const regex = new RegExp(spaces, 'g');
+  const newText = text.replace(regex, tab);
+
+  return newText;
+}
+
 /**
  * Creates a space insert.
  * @param {number} line      Line to insert space.

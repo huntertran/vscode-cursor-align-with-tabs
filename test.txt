@@ -1,0 +1,11 @@
+let myVar  			= 123;
+const myOtherVar    = 123456;
+const bar  			= 0;
+let foo    			= bar;
+
+
+
+let myVar = 123;
+const myOtherVar = 123456;
+const bar = 0;
+let foo = bar;
