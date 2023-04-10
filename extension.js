@@ -23,7 +23,11 @@ function alignCursors() {
   const targetLength    = getMaxAlignBlockLength   (alignBlocks);
   
   // calculate where we should insert spaces
-  const spaceInserts = createSpaceInsertsFromAlignBlocks(alignBlocks, targetStartChar, targetLength);
+
+	// TODO: Extra logic should be implemented here to determine when do use tab or space.
+  // const spaceInserts = createSpaceInsertsFromAlignBlocks(alignBlocks, targetStartChar, targetLength);
+  const spaceInserts = createTabInsertsFromAlignBlocks(alignBlocks, targetStartChar, targetLength);
+	
   if (spaceInserts.length === 0) {
     return;
   }
@@ -179,9 +183,6 @@ function getMaxAlignBlockLength(alignBlocks) {
   return maxBlockLength;
 }
 
-
-
-
 /**
  * Creates space inserts to align the given align blocks. Space Inserts
  * hold spaces and the position to insert them.
@@ -190,37 +191,27 @@ function getMaxAlignBlockLength(alignBlocks) {
  * @param {number}   targetLength    Length to align the blocks to.
  */
 function createSpaceInsertsFromAlignBlocks(alignBlocks, targetStartChar, targetLength) {
-  const spaceInserts = [];
-  
-  // create space inserts for each align block
-  for (let i = 0; i < alignBlocks.length; ++i) {
-    const alignBlock = alignBlocks[i];
-    const alignBlockLength = alignBlock.endChar - alignBlock.startChar;
-    
-    const startDist = targetStartChar - alignBlock.startChar;
-    const endDist   = targetLength    - alignBlockLength;
-    
-    if (startDist > 0) {
-      // insert spaces before the align block to align the left side
-      spaceInserts.push(createSpaceInsert(alignBlock.line, alignBlock.startChar, startDist));
-    }
-    if (endDist > 0) {
-      // insert spaces after the align block to align the right side
-      spaceInserts.push(createSpaceInsert(alignBlock.line, alignBlock.endChar, endDist));
-    }
-  }
-  
-  return spaceInserts;
-}
+	const spaceInserts = [];
 
-function convertSpacesToTabs(text, tabSize) {
-  // Replace spaces with tabs
-  const tab = '\t';
-  const spaces = ' '.repeat(tabSize);
-  const regex = new RegExp(spaces, 'g');
-  const newText = text.replace(regex, tab);
+	// create space inserts for each align block
+	for (let i = 0; i < alignBlocks.length; ++i) {
+		const alignBlock = alignBlocks[i];
+		const alignBlockLength = alignBlock.endChar - alignBlock.startChar;
 
-  return newText;
+		const startDist = targetStartChar - alignBlock.startChar;
+		const endDist = targetLength - alignBlockLength;
+
+		if (startDist > 0 || extraTabRequired) {
+			// insert spaces before the align block to align the left side
+			spaceInserts.push(createSpaceInsert(alignBlock.line, alignBlock.startChar, startDist));
+		}
+		if (endDist > 0) {
+			// insert spaces after the align block to align the right side
+			spaceInserts.push(createSpaceInsert(alignBlock.line, alignBlock.endChar, endDist));
+		}
+	}
+
+	return spaceInserts;
 }
 
 /**
@@ -231,8 +222,62 @@ function convertSpacesToTabs(text, tabSize) {
  * @returns Space insert.
  */
 function createSpaceInsert(line, startChar, dist) {
-  return {
-    pos: new vscode.Position(line, startChar),
-    str: ' '.repeat(dist)
-  };
+	return {
+		pos: new vscode.Position(line, startChar),
+		str: ' '.repeat(dist)
+	};
+}
+
+/**
+ * Creates tab inserts to align the given align blocks. Tab Inserts
+ * hold tabs and the position to insert them.
+ * @param {Object[]} alignBlocks     Align blocks to align.
+ * @param {number}   targetStartChar Starting character to align the blocks to.
+ * @param {number}   targetLength    Length to align the blocks to.
+ */
+function createTabInsertsFromAlignBlocks(alignBlocks, targetStartChar, targetLength) {
+	extraTabRequired = targetStartChar % 4 != 0;
+
+	const tabInserts = [];
+
+	// create tab inserts for each align block
+	for (let i = 0; i < alignBlocks.length; ++i) {
+		const alignBlock = alignBlocks[i];
+		const alignBlockLength = alignBlock.endChar - alignBlock.startChar;
+
+		const startDist = targetStartChar - alignBlock.startChar;
+		const endDist = targetLength - alignBlockLength;
+
+		if (startDist > 0 || extraTabRequired) {
+			// insert tabs before the align block to align the left side
+			tabInserts.push(createTabInsert(alignBlock.line, alignBlock.startChar, startDist, extraTabRequired));
+		}
+		if (endDist > 0) {
+			// insert tabs after the align block to align the right side
+			tabInserts.push(createTabInsert(alignBlock.line, alignBlock.endChar, endDist, extraTabRequired));
+		}
+	}
+
+	return tabInserts;
+}
+
+/**
+ * Create a tab insert
+ * @param {number} line      					Line to insert tab.
+ * @param {number} startChar 					Character position to insert tab at.
+ * @param {number} dist      					Length between block start position and target start position
+ * @param {boolean} endTabRequired		Determine whether a extra tab at the end is required.	
+ * @returns Tab insert.
+ */
+function createTabInsert(line, startChar, dist, extraTabRequired = false) {
+	let tabCount = Math.ceil(dist / 4);
+
+	if (extraTabRequired && startChar % 4 != 0) {
+		tabCount++;
+	}
+
+	return {
+		pos: new vscode.Position(line, startChar),
+		str: '\t'.repeat(tabCount)
+	};
 }
