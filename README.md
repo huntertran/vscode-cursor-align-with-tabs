@@ -11,13 +11,13 @@ This repo is modifed upon the original repo by yo1dog here: https://github.com/y
 
 ### Cursor Align
 
-![Cursor Align Demo](img/cursorAlignDemo.gif)
+![Cursor Align Demo](https://raw.githubusercontent.com/huntertran/vscode-cursor-align-with-tabs/master/img/cursorAlignDemo.gif)
 
 ### Selection Align
 
-![Select Align Demo 1](img/selectAlignDemo1.gif)
+![Select Align Demo 1](https://raw.githubusercontent.com/huntertran/vscode-cursor-align-with-tabs/master/img/selectAlignDemo1.gif)
 
-![Select Align Demo 2](img/selectAlignDemo2.gif)
+![Select Align Demo 2](https://raw.githubusercontent.com/huntertran/vscode-cursor-align-with-tabs/master/img/selectAlignDemo2.gif)
 
 
 ## Extension Commands

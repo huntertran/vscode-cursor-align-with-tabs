@@ -1,9 +1,9 @@
 {
-  "name": "cursor-align",
-  "displayName": "Cursor Align",
-  "description": "Aligns all cursors using spaces.",
+  "name": "huntertran-cursor-align",
+  "displayName": "Cursor Align by Hunter Tran",
+  "description": "Aligns all cursors using tab or space.",
   "icon": "img/icon.png",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "huntertran",
   "engines": {
     "vscode": "^1.75.0"
@@ -58,12 +58,11 @@
     "eslint": "^8.36.0"
   },
   "bugs": {
-    "url": "https://github.com/huntertran/vscode-cursor-align/issues",
-    "email": "mike@yo1.dog"
+    "url": "https://github.com/huntertran/vscode-cursor-align-with-tabs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/huntertran/vscode-cursor-align.git"
+    "url": "https://github.com/huntertran/vscode-cursor-align-with-tabs.git"
   },
-  "homepage": "https://github.com/huntertran/vscode-cursor-align"
+  "homepage": "https://github.com/huntertran/vscode-cursor-align-with-tabs"
 }
