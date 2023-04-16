@@ -3,14 +3,14 @@
   "displayName": "Cursor Align",
   "description": "Aligns all cursors using spaces.",
   "icon": "img/icon.png",
-  "version": "1.1.0",
-  "publisher": "yo1dog",
+  "version": "1.2.0",
+  "publisher": "huntertran",
   "engines": {
     "vscode": "^1.75.0"
   },
   "license": "MIT",
   "categories": [
-    "Other"
+    "Formatters"
   ],
   "main": "./extension.js",
   "browser": "./extension.js",
@@ -21,15 +21,36 @@
   "contributes": {
     "commands": [
       {
-        "command": "yo1dog.cursor-align.alignCursors",
+        "command": "huntertran.cursor-align.alignCursors",
         "title": "Align Cursors"
       }
     ],
     "keybindings": [
       {
-        "command": "yo1dog.cursor-align.alignCursors",
+        "command": "huntertran.cursor-align.alignCursors",
         "key": "alt+a",
         "when": "editorTextFocus"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "Cursor Align",
+        "properties": {
+          "align-cursor.alignCharacter": {
+            "type": "string",
+            "default": "default",
+            "enum": [
+              "default",
+              "tab",
+              "space"
+            ],
+            "enumDescriptions": [
+              "Use VSCode default tab character (Recommended)",
+              "Use tab characters",
+              "Use space characters"
+            ]
+          }
+        }
       }
     ]
   },
@@ -37,12 +58,12 @@
     "eslint": "^8.36.0"
   },
   "bugs": {
-    "url": "https://github.com/yo1dog/vscode-cursor-align/issues",
+    "url": "https://github.com/huntertran/vscode-cursor-align/issues",
     "email": "mike@yo1.dog"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yo1dog/vscode-cursor-align.git"
+    "url": "https://github.com/huntertran/vscode-cursor-align.git"
   },
-  "homepage": "https://github.com/yo1dog/vscode-cursor-align"
+  "homepage": "https://github.com/huntertran/vscode-cursor-align"
 }

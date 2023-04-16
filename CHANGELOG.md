@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+## [1.2.0] - 2023-04-16
+### Added
+- Suport tab character (controlled via setting)
+- Suport using VSCode default tab character
+
 ## [1.1.0] - 2021-11-29
 ### Added
 - Added web support.

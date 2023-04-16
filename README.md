@@ -2,6 +2,10 @@
 
 Aligns all of the cursors/selections into a vertical line by inserting spaces. A very simple, quick, easy, and agnostic way to align code/text however you want.
 
+## Original repository
+
+This repo is modifed upon the original repo by yo1dog here: https://github.com/yo1dog/vscode-cursor-align
+
 
 ## Features
 
@@ -20,7 +24,23 @@ Aligns all of the cursors/selections into a vertical line by inserting spaces. A
 
  Command                           | Description
 -----------------------------------|-------------
-`yo1dog.cursor-align.alignCursors` | Aligns all cursors/selections.
+`huntertran.cursor-align.alignCursors` | Aligns all cursors/selections.
+
+## Extension Settings
+
+```
++---------+---------+-------------------------------------------------------------+
+| Setting | Value   | Description                                                 |
++=========+=========+=============================================================+
+| align-cursor.alignCharacter                                                     |
++---------+---------+-------------------------------------------------------------+
+|         | default | Use VSCode default tab character and tab size               |
+|         +---------+-------------------------------------------------------------+
+|         | tab     | Use tab character with VSCode tab size                      |
+|         +---------+-------------------------------------------------------------+
+|         | space   | Use space character with VSCode tab size (default 4 spaces) |
++---------+---------+-------------------------------------------------------------+
+```
 
 
 ## Implementation Details
@@ -40,12 +60,12 @@ Likewise, multiple selections per line don't make much sense, but here's how the
 
 If instead of aligning cursors a character is inserted or nothing happens, the default `alt+a` keybinding may be being caught higher up (ex: at the OS level). Try changing the keybinding.
 
-If you continue to have problems, please open a new issue [here](https://github.com/yo1dog/vscode-cursor-align/issues).
+If you continue to have problems, please open a new issue [here](https://github.com/huntertran/vscode-cursor-align/issues).
 
 
 ## Known Issues
 
-See [Issues](https://github.com/yo1dog/vscode-cursor-align/issues).
+See [Issues](https://github.com/huntertran/vscode-cursor-align/issues).
 
 ## Release Notes
 
